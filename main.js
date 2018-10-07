@@ -100,7 +100,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nz-layout class=\"layout\">\n  <nz-header style=\"position:fixed; width:100%; z-index: 923;\">\n    <ul nz-menu [nzTheme]=\"'dark'\" [nzMode]=\"'horizontal'\" style=\"line-height: 64px;\">\n      <li nz-menu-item><a routerLink=\"/\">首页</a></li>\n      <li nz-menu-item><a href=\"https://github.com/zhongzhixing/fake-data\" target=\"_blank\"><i class=\"anticon anticon-github\"></i></a></li>\n    </ul>\n  </nz-header>\n  <nz-content style=\"padding:0 50px;margin-top:64px;\">\n    <div id=\"content\">\n      <router-outlet></router-outlet>\n    </div>\n  </nz-content>\n  <nz-footer>\n    <a href=\"http://github.com/zhongzhixing/\" target=\"_blank\">Fake Data ©{{year}} Implement By\n      zhongzhixing</a>\n  </nz-footer>\n</nz-layout>"
+module.exports = "<nz-layout class=\"layout\">\n  <nz-header>\n    <ul nz-menu [nzTheme]=\"'dark'\" [nzMode]=\"'horizontal'\" style=\"line-height: 64px;\">\n      <li nz-menu-item><a routerLink=\"/\">首页</a></li>\n      <li nz-menu-item><a href=\"https://github.com/zhongzhixing/fake-data\" target=\"_blank\"><i class=\"anticon anticon-github\"></i></a></li>\n    </ul>\n  </nz-header>\n  <nz-content>\n    <div id=\"content\">\n      <router-outlet></router-outlet>\n    </div>\n  </nz-content>\n  <nz-footer>\n    <a href=\"http://github.com/zhongzhixing/\" target=\"_blank\">Fake Data ©{{year}} Implement By\n      zhongzhixing</a>\n  </nz-footer>\n</nz-layout>"
 
 /***/ }),
 
@@ -111,7 +111,7 @@ module.exports = "<nz-layout class=\"layout\">\n  <nz-header style=\"position:fi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#content {\n  margin-top: 20px;\n  min-height: 500px;\n}\nnz-footer {\n  text-align: center;\n  background-color: black;\n  position: fixed;\n  width: 100%;\n  left: 0;\n  bottom: 0;\n  z-index: -1;\n}\nnz-footer a {\n  color: white;\n}\n"
+module.exports = "#content {\n  margin-top: 20px;\n  min-height: 500px;\n}\nnz-header {\n  position: fixed;\n  width: 100%;\n  z-index: 923;\n}\nnz-content {\n  padding: 0 50px;\n  margin-top: 64px;\n  background-color: #f0f2f5;\n}\nnz-footer {\n  text-align: center;\n  background-color: black;\n  position: fixed;\n  width: 100%;\n  left: 0;\n  bottom: 0;\n  z-index: -1;\n}\nnz-footer a {\n  color: white;\n}\n"
 
 /***/ }),
 
