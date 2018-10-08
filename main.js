@@ -1042,6 +1042,7 @@ var SqlInputComponent = /** @class */ (function () {
             this.messageService.error('sql 不能为空');
         }
         else {
+            // bug constrain 限制,默认值指定多个，mockjs picke
             // 简单判断否是 sql create 语句; create table 开头 则是
             var createReg = /^\s*create\s*table/i;
             if (!createReg.test(this.sql)) {
