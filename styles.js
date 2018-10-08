@@ -37,7 +37,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* You can add global styles to this file, and also import other style files */\n"
+module.exports = "/* You can add global styles to this file, and also import other style files */\nbody {\n  background-color: #f0f2f5;\n}\n"
 
 /***/ }),
 
@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/xing/code/frontend/angular/fake-data/node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css */"./node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css");
-module.exports = __webpack_require__(/*! /home/xing/code/frontend/angular/fake-data/src/styles.less */"./src/styles.less");
+__webpack_require__(/*! E:\git\fake-data\node_modules\ng-zorro-antd\src\ng-zorro-antd.min.css */"./node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css");
+module.exports = __webpack_require__(/*! E:\git\fake-data\src\styles.less */"./src/styles.less");
 
 
 /***/ })
