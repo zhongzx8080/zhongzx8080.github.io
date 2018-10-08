@@ -238,7 +238,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div nz-row>\n  <div nz-col nzSpan=\"1\">\n    <button nz-button (click)=\"refresh()\"><i class=\"anticon anticon-reload\"></i></button>\n  </div>\n  <div nz-col nzSpan=\"3\">\n    <input nz-input placeholder=\"表名\" [(ngModel)]=\"tableName\" nz-tooltip nzTitle=\"输入表名\" nzPlacement=\"bottom\">\n  </div>\n  <div nz-col nzSpan=\"2\">\n    <button nz-button (click)=\"copyAs()\" class=\"copyAsSql\" data-clipboard-action=\"copy\" data-clipboard-target=\"#sql\">复制为INSERT语句</button>\n  </div>\n</div>\n<br>\n<nz-table #table nzBordered [nzData]=\"dataSet\" [nzPageSize]=\"10\">\n  <thead>\n    <tr *ngIf='options'>\n      <th *ngFor='let option of options'>{{option['title']}}</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let data of table.data\">\n      <td *ngFor='let option of options'>\n        <span *ngIf=\"option['type'][0] != '@image' \">{{data[option['title']]}}</span>\n        <img *ngIf=\"option['type'][0] == '@image' \" src=\"{{data[option['title']]}}\">\n      </td>\n    </tr>\n  </tbody>\n</nz-table>\n<br>\n<textarea id=\"sql\" nz-input [(ngModel)]=\"copiedSql\" nzAutosize></textarea>"
+module.exports = "<div nz-row>\n  <div nz-col nzSpan=\"1\">\n    <button nz-button (click)=\"refresh()\"><i class=\"anticon anticon-reload\"></i></button>\n  </div>\n  <div nz-col nzSpan=\"3\">\n    <input nz-input placeholder=\"表名\" [(ngModel)]=\"tableName\" nz-tooltip nzTitle=\"输入表名\" nzPlacement=\"bottom\">\n  </div>\n  <div nz-col nzSpan=\"4\">\n    <button nz-button (click)=\"copyAs()\" class=\"copyAsSql\" data-clipboard-action=\"copy\" data-clipboard-target=\"#sql\">复制为INSERT语句</button>\n  </div>\n  <div nz-col nzSpan=\"2\">\n    <button nz-button (click)=\"copyAs('json')\" class=\"copyAsJson\" data-clipboard-action=\"copy\" data-clipboard-target=\"#json\">复制为JSON</button>\n  </div>\n</div>\n<br>\n<nz-table #table nzBordered [nzData]=\"dataSet\" [nzPageSize]=\"10\">\n  <thead>\n    <tr *ngIf='options'>\n      <th *ngFor='let option of options'>{{option['title']}}</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let data of table.data\">\n      <td *ngFor='let option of options'>\n        <span *ngIf=\"option['type'][0] != '@image' \">{{data[option['title']]}}</span>\n        <img *ngIf=\"option['type'][0] == '@image' \" src=\"{{data[option['title']]}}\">\n      </td>\n    </tr>\n  </tbody>\n</nz-table>\n<br>\n<textarea id=\"sql\" nz-input [(ngModel)]=\"copiedSql\" nzAutosize></textarea>\n<textarea id=\"json\" nz-input [(ngModel)]=\"copiedJson\" nzAutosize></textarea>"
 
 /***/ }),
 
@@ -249,7 +249,7 @@ module.exports = "<div nz-row>\n  <div nz-col nzSpan=\"1\">\n    <button nz-butt
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#sql {\n  opacity: 0;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: -1;\n}\n"
+module.exports = "#sql,\n#json {\n  opacity: 0;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: -1;\n}\n"
 
 /***/ }),
 
@@ -290,19 +290,25 @@ var DataTableComponent = /** @class */ (function () {
         this.options = [];
         this.count = 10;
         this.copiedSql = '';
+        this.copiedJson = '';
         this.tableName = '';
     }
     DataTableComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.loadData();
         // 复制到剪切版
-        this.clipboard = new clipboard__WEBPACK_IMPORTED_MODULE_3__('.copyAsSql');
-        this.clipboard.on('success', function (e) {
+        this.sqlClipBoard = new clipboard__WEBPACK_IMPORTED_MODULE_3__('.copyAsSql');
+        this.sqlClipBoard.on('success', function (e) {
+            _this.messageService.success('已复制至剪切板');
+        });
+        this.jsonClipBoard = new clipboard__WEBPACK_IMPORTED_MODULE_3__('.copyAsJson');
+        this.jsonClipBoard.on('success', function (e) {
             _this.messageService.success('已复制至剪切板');
         });
     };
     DataTableComponent.prototype.ngOnDestroy = function () {
-        this.clipboard.destroy();
+        this.sqlClipBoard.destroy();
+        this.jsonClipBoard.destroy();
     };
     DataTableComponent.prototype.loadData = function () {
         this.dataSet = this.dataService.generate(this.options, this.count);
@@ -317,6 +323,9 @@ var DataTableComponent = /** @class */ (function () {
             this.tableName = this.tableName === '' ? 'demo' : this.tableName;
             var reg = /demo/g;
             this.copiedSql = this.copiedSql.replace(reg, this.tableName);
+        }
+        else {
+            this.copiedJson = JSON.stringify(this.dataSet);
         }
     };
     DataTableComponent = __decorate([
